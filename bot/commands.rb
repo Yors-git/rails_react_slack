@@ -1,0 +1,1 @@
+require 'bot/commands/calculate'
