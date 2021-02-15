@@ -53,4 +53,4 @@ In Slack administration create a new Bot Integration under [services/new/bot](ht
 
 ### Copyright & License
 
-Copyright [Daniel Doubrovkine](http://code.dblock.org), [MIT License](LICENSE.md).
+Created by Jorge Torres.
