@@ -5,6 +5,11 @@ class Api::V1::PrimesController < ApplicationController
     render json: primes_arr
   end
 
+  def all
+    arrays_arr = PrimesArr.all.order('created_at DESC')
+    render json: arrays_arr
+  end
+
   def create
     @numbers_arr = PrimesArr.new(numbers: [Rails.cache.read('primeNums')])
     respond_to do |format|

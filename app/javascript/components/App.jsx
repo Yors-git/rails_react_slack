@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react'
 
 const App=()=> {
   const [primes, setPrimes]=useState([])
+  const [primesList, setPrimesList]=useState([])
   const getPrimes = async () => {
     try {
       await fetch("/api/v1/primes/index")
@@ -12,6 +13,16 @@ const App=()=> {
         throw new Error("Network response was not ok.");
       })
       .then(response => setPrimes(response))
+
+      await fetch("/api/v1/primes/all")
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+      .then(response => setPrimesList(response))
+
     } catch (err) {
       console.error(err.message);
     }
@@ -35,7 +46,7 @@ const App=()=> {
         throw new Error("Network response was not ok.");
       })
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   }
   
@@ -68,6 +79,21 @@ const App=()=> {
         ))}
       </div>
        {button(primes)}
+       <div className="container py-4">
+       <h3 className="display-6">Saved Primes:</h3>
+        <div>
+          {primesList && primesList.map((primArr, index)=>(
+            <div className=".d-flex row" key={index}>
+            {primArr.numbers.map((el, index)=>(
+              <div className=".d-flex row py-3" key={index}>
+                {el.map((e, index)=>(
+                  <span className="lead px-2 border border-dark" key={index}>{e}</span>
+                ))}
+              </div>
+            ))}</div>
+          ))}
+        </div>
+       </div>
     </div>
   );
 }
