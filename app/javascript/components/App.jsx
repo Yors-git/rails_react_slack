@@ -1,4 +1,4 @@
-import React,{ useEffect,useState } from 'react'
+import React, { useEffect,useState } from 'react'
 
 const App=()=> {
   const [primes, setPrimes]=useState([])
@@ -16,6 +16,28 @@ const App=()=> {
       console.error(err.message);
     }
   };
+
+  const savePrimes = async (pri) => {
+    try {
+      const token = document.querySelector('meta[name="csrf-token"]').content;
+      await fetch('/api/v1/primes/create', {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(pri)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
+      })
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
   
   useEffect(()=>{
     getPrimes()
@@ -28,7 +50,12 @@ const App=()=> {
   const button = (prim) => {
     let button;
     if (prim) {
-      return button = <button className="btn btn-lg custom-button" role="button">Save Primes</button> ;
+      return button = <button 
+                        className="btn btn-lg custom-button" 
+                        role="button"
+                        onClick={()=>savePrimes(prim)}
+                        >Save Primes
+                      </button> ;
     }
   }
 
