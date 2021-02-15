@@ -3,7 +3,7 @@ Rails-React-SlackBot
 
 ### Description:
 
-It is a Slackbot that performs simple math operations (+,-,*,/) and also checks if a number is prime putting 'p?' before the numbber to check, if the number is prime the bot will display all the prime numbers smaller than the given number and at the same time it will diplay the array of numbers in the browser through a React app.
+It is a Slackbot that performs simple math operations (+,-,*,/) and also checks if a number is prime putting 'p?' before the number to check, if the number is prime the bot will display all the prime numbers smaller than the given number and at the same time it will display the array of numbers in the browser through a React app.
 
 ## Screenshot
 
